@@ -5,15 +5,13 @@ Author: Aravind Parappil
 import numpy as np
 import math
 from collections import defaultdict
-import random
-
-hyp_alphas = defaultdict()
 
 def train(data, train_orientation, random_hyp_pairs, max_iterations):
+    hyp_alphas = defaultdict(dict)
     weights = np.array([[float(1/len(data))]]* len(data))
     my_labels = np.array([[-1]]* len(data))
        
-    for i in range(0,max_iterations):
+    for i in range(0, max_iterations):
         error = 0
         
         column_1 = random_hyp_pairs[i][0]
@@ -38,7 +36,9 @@ def train(data, train_orientation, random_hyp_pairs, max_iterations):
                 weights[k] *= (error/(1-error))
 
         weights = normalize(weights)
-        hyp_alphas[(column_1, column_2)] = math.log((1-error)/error)
+        hyp_alphas[train_orientation][(column_1, column_2)] = math.log((1-error)/error)
+        
+    return hyp_alphas
 
 # Divide each element with sum of array
 def normalize(weights):

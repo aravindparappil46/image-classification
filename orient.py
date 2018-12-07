@@ -8,6 +8,7 @@ import sys
 import re
 import math
 from collections import defaultdict
+import random
 import numpy as np
 import adaboost as adaboost
 from knn import *
@@ -30,7 +31,12 @@ if model == 'best':
     model = 'nearest'
     
 if model == 'adaboost':
+
+    #----------------------------------#
+    #            TRAINING              #
+    #----------------------------------#
     random_hyp_pairs = []
+    max_iterations = 20
     
     # Finding total number of cols in data...Not counting the col with actual labels
     # Since np array lengths are calculated from index 1, have to decrement 1 too
@@ -52,8 +58,17 @@ if model == 'adaboost':
                 
         random_hyp_pairs.append((column_1,column_2))
         
-    adaboost.train(data, 0, random_hyp_pairs)
+    alphas_for_0 = adaboost.train(data, 0, random_hyp_pairs, max_iterations)
+    alphas_for_90 = adaboost.train(data, 90, random_hyp_pairs, max_iterations)
+    alphas_for_180 = adaboost.train(data, 180, random_hyp_pairs, max_iterations)
+    alphas_for_270 = adaboost.train(data, 270, random_hyp_pairs, max_iterations)
 
+    
+    #----------------------------------#
+    #            TESTING               #
+    #----------------------------------#
+
+    
 elif model == 'nearest':
     print('K Nearest Neighbors model')
 
