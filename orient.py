@@ -18,4 +18,6 @@ train_or_test = sys.argv[1]
 input_file = sys.argv[2]
 model_file = sys.argv[3]
 
-
+# Read file into a variable
+with open(input_file, 'r', encoding="utf-8") as file:
+        raw_input = file.read()
