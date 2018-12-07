@@ -30,7 +30,29 @@ if model == 'best':
     model = 'nearest'
     
 if model == 'adaboost':
-    adaboost.train(data)
+    random_hyp_pairs = []
+    
+    # Finding total number of cols in data...Not counting the col with actual labels
+    # Since np array lengths are calculated from index 1, have to decrement 1 too
+    total_num_of_cols = len(data[0])-2
+    
+    for i in range(0,max_iterations):
+        # Getting two random column indices. Will find difference between row vals
+        # of these two columns, which will be our hypothesis
+        # Idea credit: Shivam Thakur
+        column_1 = random.randint(1,total_num_of_cols)
+        column_2 = random.randint(1,total_num_of_cols)
+
+        # Resolving conflict, if any
+        if column_1 == column_2:
+            if column_2 != total_num_of_cols:
+                column_2 += 1
+            else:
+                column_2 -= 1
+                
+        random_hyp_pairs.append((column_1,column_2))
+        
+    adaboost.train(data, 0, random_hyp_pairs)
 
 elif model == 'nearest':
     print('K Nearest Neighbors model')

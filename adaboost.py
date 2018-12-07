@@ -8,37 +8,26 @@ from collections import defaultdict
 import random
 
 hyp_alphas = defaultdict()
-max_iterations = 20
 
-def train(data):
+def train(data, train_orientation, random_hyp_pairs, max_iterations):
     weights = np.array([[float(1/len(data))]]* len(data))
     my_labels = np.array([[-1]]* len(data))
-
-    # Finding total number of cols in data...Not counting the col with actual labels
-    # Since np array lengths are calculated from index 1, have to decrement 1 too
-    total_num_of_cols = len(data[0])-2
-    
+       
     for i in range(0,max_iterations):
         error = 0
-        column_1 = random.randint(1,total_num_of_cols)
-        column_2 = random.randint(1,total_num_of_cols)
-
-        # Resolving conflict, if any
-        if column_1 == column_2:
-            if column_2 != total_num_of_cols:
-                column_2 += 1
-            else:
-                column_2 -= 1
-
+        
+        column_1 = random_hyp_pairs[i][0]
+        column_2 = random_hyp_pairs[i][1]
+        
         # Assigning labels based on hyp    
         for j in range(len(data)):
             if data[j][column_1] - data[j][column_2] < 0:
-                my_labels[j] = 0
+                my_labels[j] = train_orientation
             else:
                 my_labels[j] = -1
 
             # first col of data contains actual labels. Comparing....
-            # if mismatch, then update error as the sum of weight for row mismatched
+            # if mismatch, then update error as the sum of weight at row mismatched
             if my_labels[j] !=  data[:,0][j]:
                 error += weights[j]
 
@@ -55,6 +44,5 @@ def train(data):
 def normalize(weights):
     total_sum = weights.sum()
     return np.divide(weights, total_sum)
-        
             
 
