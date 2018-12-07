@@ -22,9 +22,9 @@ train_or_test = sys.argv[1]
 input_file = sys.argv[2]
 model_file = sys.argv[3]
 
-# Read input file into a variable
-with open(input_file, 'r', encoding="utf-8") as file:
-        raw_input = file.read()
+    
+# Read input file into a variable..skips firsts column with image name
+data = np.loadtxt(input_file, usecols=range(1,194))
 
 # Based on the model required, call respective functions
 if model == 'adaboost':
