@@ -10,36 +10,41 @@ import operator
 
 def train(data, train_orientation, random_hyp_pairs, max_iterations, hyp_alphas):
     print("Training for ", train_orientation)
-    weights = np.array([[float(1/len(data))]]* len(data))
-    my_labels = np.array([[-1]]* len(data))
+    weights = [1/float(len(data))]* len(data)
+    my_labels = []
        
     for i in range(0, max_iterations):              
         column_1 = random_hyp_pairs[i][0]
         column_2 = random_hyp_pairs[i][1]
-        error = 0
         
+        error = 0.0
         # Assigning labels based on hyp    
         for j in range(len(data)):
             if data[j][column_1] - data[j][column_2] > 0:
-                my_labels[j] = train_orientation
+                my_labels.append([train_orientation])
             else:
-                my_labels[j] = -1
+                my_labels.append([90, 180, 270])
 
             # First col of data contains actual labels. Comparing....
             # if mismatch, then update error as the sum of weight at row mismatched
             
-            if my_labels[j][0] !=  data[:,0][j]:
+            if  data[:,0][j] not in my_labels[j]:      
                 error += weights[j]
-   
+                
+        
         # Error value has been calculated now...
         # Updating weights for correctly classified rows
-      
-        for k in range(len(data)):
-            if my_labels[k] == data[:,0][k]:
-                weights[k] *= (float((error/(1-error))))
+        
+        print(error)
+        if error < 0.5: 
+            for k in range(len(data)):
+                if data[:,0][k] in my_labels[k]:
+                    weights[k] = weights[k] * (float(error)/(1-error))
 
-        weights = normalize(weights)
-        hyp_alphas[train_orientation][(column_1, column_2)] = math.log(float((1-error)/error))
+            #weights = normalize(weights)
+            total_sum = sum(weights)
+            weights = [i/total_sum for i in weights]
+            hyp_alphas[train_orientation][(column_1, column_2)] = math.log(float((1-error)/error))
             
     return hyp_alphas
 
@@ -78,4 +83,4 @@ def test(data, hyp_alphas, image_names):
             correct_prediction_count += 1
     
     # Finding how many records were correctly identified
-    print((correct_prediction_count/len(data))*100)
+    print('Accuracy: ',(correct_prediction_count/len(data)))
