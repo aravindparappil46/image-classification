@@ -18,10 +18,8 @@ Then, we take first 'k' values of the sorted list of euclidean distances. We con
 
 '''
 
-train_all = open("train-data.txt", "r")
-train_labels = open("train-labels.txt", "r")
-test_all = open("test-data.txt", "r")
-test_labels = open("test-labels.txt", "r")
+#train_all = open("train-data.txt", "r")
+#test_all = open("test-data.txt", "r")
 
 
 #The function below reads the input data and returns that data as an array.
@@ -33,16 +31,19 @@ def read_file(file):
         data_list.append(line.split()[0:2])                    #Appends the orientation
     return np.array(data),np.array(data_list)
 
-train_data,train_names=read_file(train_all)
-test_data,test_names=read_file(test_all)	
+#train_data,train_names=read_file(train_all)
+#test_data,test_names=read_file(test_all)	
 
 
 #The eucidean function calculates the euclidean distance between the data points 
 def euclidean(train_data,test_data):
+	count = 0
 	#The distance of the test data with each of the training data is calculated and stores in a list.
 	euc_distances = []
 	for test in test_data:
 		distances = []
+		count += 1
+		print(count)
 		for train in train_data:
 			dist = np.linalg.norm(test[1:]-train[1:])
 			distances.append(dist)
@@ -117,6 +118,6 @@ def accuracy(prediction, test_names):
 			for _string in _list:
 				f.write(str(_string))
 
-accuracy(knn(euclidean(train_data,test_data), train_data), test_names)
+#accuracy(knn(euclidean(train_data,test_data), train_data), test_names)
 
 

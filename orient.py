@@ -12,12 +12,13 @@ import random
 import pickle as pickle
 import numpy as np
 import adaboost as adaboost
-from knn import *
+import knn as knn
 from forest import *
 import datetime
 
+
 # For testing purposes..remove below line for actual program
-sys.argv = ['program_name','test','test-data.txt','model-file.txt', 'adaboost']
+sys.argv = ['program_name','test','test-data.txt','model-file.txt', 'nearest']
 
 # Fetching cmd-line args
 train_or_test = sys.argv[1]
@@ -93,7 +94,6 @@ if model == 'adaboost':
     #----------------------------------#
     elif train_or_test == 'test':      
         f = open(model_file, 'rb')
-        
         # Load the model file and pass to test function
         hyp_alphas = pickle.load(f)
         adaboost.test(data, hyp_alphas, image_names)
@@ -101,7 +101,20 @@ if model == 'adaboost':
         
     
 elif model == 'nearest':
-    print('K Nearest Neighbors model')
+    
+    file = open(input_file, "r")
+    if train_or_test == 'train':
+        train_data,train_names=knn.read_file(file)
+        f = open(model_file, 'wb')
+        pickle.dump(train_data, f, protocol=pickle.HIGHEST_PROTOCOL)
+        f.close()
+
+    else:
+        f = open(model_file, 'rb')
+        train_data = pickle.load(f)
+        test_data,test_names=knn.read_file(file)	
+        knn.accuracy(knn.knn(knn.euclidean(train_data,test_data), train_data), test_names)
+        f.close()
 
 elif model == 'forest':
     print('Decision Trees')
