@@ -166,7 +166,7 @@ def test_forest(input_file, model_file):
 	for line in input:
 		image = list()
 		elements = [e for e in line.split()]
-		output.write(str(elements[0]) + ' ' + str(final_output[i]) )
+		output.write(str(elements[0]) + ' ' + str(final_output[i])+'\n' )
 		i += 1
 	output.close()
 	input.close()

@@ -111,7 +111,7 @@ def accuracy(prediction, test_names):
                     accuracy += 1
     accuracy = (float(accuracy)/len(test_names)) * 100 
     print("Accuracy = ",accuracy,"%")
-
+    f.close()
 """
 	with open('answer.txt', 'w') as f:
 		for item in output1:

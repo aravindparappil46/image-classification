@@ -19,10 +19,6 @@ import datetime
 import operator
 
 
-# For testing purposes..remove below line for actual program
-
-sys.argv = ['program_name','test','test-data.txt','forest_model.txt', 'forest']
-
 
 # Fetching cmd-line args
 train_or_test = sys.argv[1]
