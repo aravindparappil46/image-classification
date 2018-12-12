@@ -25,18 +25,18 @@ input_file = sys.argv[2]
 model_file = sys.argv[3]
 model = sys.argv[4]
 
-# Read input file into a variable..skips first column with image name
-data = np.loadtxt(input_file, usecols=range(1,194))
-
-# All image names stored in separate array
-image_names = np.genfromtxt(input_file, dtype="str", usecols=range(0,1))
 
 # Based on the model required, call respective functions
 if model == 'best':
     model = 'nearest'
     
 if model == 'adaboost':
+    
+    # Read input file into a variable..skips first column with image name
+    data = np.loadtxt(input_file, usecols=range(1,194))
 
+    # All image names stored in separate array
+    image_names = np.genfromtxt(input_file, dtype="str", usecols=range(0,1))
     #----------------------------------#
     #            TRAINING              #
     #----------------------------------#
