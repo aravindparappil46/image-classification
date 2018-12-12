@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# REFERENCE: Google Developers Youtube video https://www.youtube.com/watch?v=LDRbO9a6XPU
+
 import math
 import operator
 import random
