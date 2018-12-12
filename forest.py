@@ -159,3 +159,14 @@ def test_forest(input_file, model_file):
 	Accuracy = 100*(count/len(test_images))
 	print("Accuracy is %f" % (Accuracy))
 	f.close()
+	
+	output = open("output.txt","w+")
+	input = open(input_file)
+	i = 0
+	for line in input:
+		image = list()
+		elements = [e for e in line.split()]
+		output.write(elements[0] + ' ' + final_output[i] )
+		i += 1
+	output.close()
+	input.close()

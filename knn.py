@@ -95,21 +95,24 @@ def knn(euc_distances, train_data):
 
 # accuracy calculates the accuracy of the orientations predicted correctly to the total number of the data.
 
-def accuracy(prediction, test_names):	
-	accuracy = 0.0
-	output1 = []
-	for i in range(0,len(test_names)):
-		temp_op = []
-		a = prediction[i]
-		b = test_names[i][0]
-		temp_op.append(b)
-		temp_op.append(a)
-		output1.append(temp_op)
-		if test_names[i][1] == prediction[i]:
-			accuracy += 1
-	accuracy = (float(accuracy)/len(test_names)) * 100 
-	print("Accuracy = ",accuracy,"%")
+def accuracy(prediction, test_names):
+    f = open('output.txt', 'a')
+    accuracy = 0.0
+    output1 = []
+    for i in range(0,len(test_names)):
+            temp_op = []
+            a = prediction[i]
+            b = test_names[i][0]
+            temp_op.append(b)
+            temp_op.append(a)
+            output1.append(temp_op)
+            f.write(test_names[i][0]+' '+prediction[i]+'\n')
+            if test_names[i][1] == prediction[i]:
+                    accuracy += 1
+    accuracy = (float(accuracy)/len(test_names)) * 100 
+    print("Accuracy = ",accuracy,"%")
 
+"""
 	with open('answer.txt', 'w') as f:
 		for item in output1:
 			f.write("%s\n" % item)
@@ -117,7 +120,7 @@ def accuracy(prediction, test_names):
 		for _list in output1:
 			for _string in _list:
 				f.write(str(_string))
-
+"""
 #accuracy(knn(euclidean(train_data,test_data), train_data), test_names)
 
 

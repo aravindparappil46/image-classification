@@ -20,7 +20,7 @@ import operator
 
 
 # For testing purposes..remove below line for actual program
-sys.argv = ['program_name','test','test-data.txt','model-file.txt', 'nearest']
+sys.argv = ['program_name','test','test-data.txt','nearest_model.txt', 'nearest']
 
 # Fetching cmd-line args
 train_or_test = sys.argv[1]
