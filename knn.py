@@ -55,7 +55,7 @@ def euclidean(train_data,test_data):
 
 
 def knn(euc_distances, train_data):	
-	k = 1
+	k = 11
 	final_minimum = []
 	final_index = []
 	new_distances = copy.deepcopy(euc_distances)     #So that, it does not overwrite the original distances.
