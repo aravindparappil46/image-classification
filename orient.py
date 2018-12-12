@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 ------------------------------------------------------------------------------------------
 Elements of AI | Assignment 4 | mkpandey-aparappi-atarfe
@@ -13,12 +14,13 @@ import pickle as pickle
 import numpy as np
 import adaboost as adaboost
 import knn as knn
-from forest import *
+import forest as forest
 import datetime
+import operator
 
 
 # For testing purposes..remove below line for actual program
-sys.argv = ['program_name','test','test-data.txt','model-file.txt', 'nearest']
+sys.argv = ['program_name','train','train-data.txt','model-file.txt', 'forest']
 
 # Fetching cmd-line args
 train_or_test = sys.argv[1]
@@ -117,6 +119,13 @@ elif model == 'nearest':
         f.close()
 
 elif model == 'forest':
-    print('Decision Trees')
 
+    if train_or_test == 'train':
+       forest.train(input_file, model_file)
+
+    else:
+        
+        forest.test_forest(input_file, model_file)
+
+                
 
