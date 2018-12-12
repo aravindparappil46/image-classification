@@ -43,7 +43,7 @@ def euclidean(train_data,test_data):
 	for test in test_data:
 		distances = []
 		count += 1
-		print(count)
+		#print(count)
 		for train in train_data:
 			dist = np.linalg.norm(test[1:]-train[1:])
 			distances.append(dist)
