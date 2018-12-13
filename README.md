@@ -1,10 +1,10 @@
-#Image Classification
+# Image Classification
 
-Assignment 4 of CSCI B551 Elements of Artificial Intelligence by Prof. David Crandall<br />
+## Assignment 4 of CSCI B551 Elements of Artificial Intelligence by Prof. David Crandall<br />
 
 Training and testing data is of the format:-<br />
 
-photo_id correct_orientation r11 g11 b11 r12 g12 b12 ...<br />
+*photo_id correct_orientation r11 g11 b11 r12 g12 b12 ...<br />
 
 where:
 • photo id is a photo ID for the image. <br />
@@ -15,10 +15,10 @@ each in the range 0-255<br /><br />
 
 
 For training, the program should be run like this:<br />
-./orient.py train train_file.txt model_file.txt [model]<br />
+*./orient.py train train_file.txt model_file.txt [model]<br />
 where [model] is one of "nearest", "adaboost", "forest", or "best"
 <br /><br />
 For testing, the program should be run like this:<br />
-./orient.py test test_file.txt model_file.txt [model]<br />
+*./orient.py test test_file.txt model_file.txt [model]<br />
 where [model] is again one of nearest, adaboost, forest, or best.
 
