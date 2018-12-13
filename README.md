@@ -1,6 +1,6 @@
 # Image Classification
 
-## Assignment 4 of CSCI B551 Elements of Artificial Intelligence by Prof. David Crandall<br />
+#### Assignment 4 of CSCI B551 Elements of Artificial Intelligence by Prof. David Crandall<br />
 
 Training and testing data is of the format:-<br />
 
